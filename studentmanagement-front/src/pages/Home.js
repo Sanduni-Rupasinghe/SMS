@@ -16,12 +16,12 @@ export default function Home() {
   }, []);
 
   const loadStudents=async()=>{
-    const result=await axios.get("http://localhost:8081/students")
+    const result=await axios.get("http://localhost:8080/students")
     setStudents(result.data);
-  };
+  }
 
   const deleteStudent=async (id)=>{
-    await axios.delete(`http://localhost:8081/student/${id}`)
+    await axios.delete(`http://localhost:8080/student/${id}`)
     loadStudents()
   }
 

@@ -30,13 +30,13 @@ export default function EditUser() {
   },[]);
 
   const loadStudents =async ()=>{
-    const result=await axios.get(`http://localhost:8081/student/${id}`)
+    const result=await axios.get(`http://localhost:8080/student/${id}`)
     setStudent(result.data)
   }
 
   const onSubmit=async (e)=>{
     e.preventDefault();
-    await axios.put(`http://localhost:8081/student/${id}`,student);
+    await axios.put(`http://localhost:8080/student/${id}`,student);
     navigate("/home");
   };
 

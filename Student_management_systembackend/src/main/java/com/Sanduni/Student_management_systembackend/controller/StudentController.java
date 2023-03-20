@@ -3,25 +3,30 @@ package com.Sanduni.Student_management_systembackend.controller;
 import com.Sanduni.Student_management_systembackend.exception.StudentNotFoundException;
 import com.Sanduni.Student_management_systembackend.model.Student;
 import com.Sanduni.Student_management_systembackend.repository.StudentRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import  org.slf4j.Logger;
 
 import java.util.List;
 @RestController
 @CrossOrigin ("http://localhost:3000")
 public class StudentController {
-
+    Logger logger = LoggerFactory.getLogger(StudentController.class);
       @Autowired
       private StudentRepository studentRepository;
 
       @PostMapping("/student")
       Student newStudent(@RequestBody Student newStudent){
+          logger.trace("New student is added");
           return studentRepository.save(newStudent);
       }
 
       @GetMapping("/students")
       List<Student>getAllUsers(){
-            return studentRepository.findAll();
+          logger.trace("List of all students");
+
+          return studentRepository.findAll();
       }
 
       @GetMapping("/student/{id}")
@@ -32,6 +37,8 @@ public class StudentController {
 
       @PutMapping("/student/{id}")
       Student updateStudent(@RequestBody Student newStudent,@PathVariable Long id) {
+          logger.trace("Student Details Updated");
+
           return studentRepository.findById(id)
                   .map(student -> {
                       student.setFirstName(newStudent.getFirstname());
@@ -46,6 +53,8 @@ public class StudentController {
 
       @DeleteMapping("/student/{id}")
       String deleteStudent(@PathVariable Long id){
+          logger.trace("Student deleted");
+
           if(!studentRepository.existsById(id)){
               throw new StudentNotFoundException(id);
           }
