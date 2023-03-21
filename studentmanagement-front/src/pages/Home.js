@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <div className='container'>
         <div className='py-4'>
-        <table className="table border shadow">
+        <table className="table table-secondary table-striped border shadow">
   <thead>
     <tr>
       <th scope="col">Id</th>
